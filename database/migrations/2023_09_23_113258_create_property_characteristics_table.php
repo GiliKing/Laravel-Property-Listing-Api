@@ -14,13 +14,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('property_characteristics', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('property_id')->unique();
             $table->float('price')->required();
             $table->integer('bedrooms')->required();
             $table->integer('bathrooms')->required();
             $table->float('sqft')->required();
             $table->float('price_sqft')->required();
-            
+
             $table->enum('property_type', [
                 PropertyTypeEnum::SINGLE->value,
                 PropertyTypeEnum::TOWNHOUSE->value,
@@ -41,8 +42,6 @@ return new class extends Migration
                 ->references('id')
                 ->on('properties')
                 ->cascadeOnDelete();
-
-            
         });
     }
 
